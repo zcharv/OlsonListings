@@ -1,0 +1,88 @@
+email:
+  smtp_host: smtp.gmail.com
+  smtp_port: 587
+  smtp_user: your_email@gmail.com
+  smtp_password: your_app_password  # Gmail app password — see README
+  from_addr: your_email@gmail.com
+  to_addrs:
+    - your_email@gmail.com
+
+search:
+  queries:
+    - "olson 911"
+    - "olson 911se"
+    - "ericson olson"
+  filter_pattern: 'olson\s*911|911\s*se|911s[e\b]'
+
+sources:
+  sailboatlistings:
+    enabled: true
+  craigslist:
+    enabled: true
+    regions:
+      # PNW (priority)
+      - seattle
+      - portland
+      - olympic
+      - skagit
+      - bellingham
+      - eugene
+      - corvallis
+      - kpr        # Kennewick-Pasco-Richland
+      - medford
+      # California
+      - sfbay
+      - losangeles
+      - sandiego
+      - sacramento
+      - santacruz
+      - monterey
+      - humboldt
+      # East Coast
+      - boston
+      - newyork
+      - longisland
+      - newjersey
+      - baltimore
+      - annapolis
+      - norfolk
+      - charleston
+      - savannah
+      # Southeast / Gulf
+      - miami
+      - tampa
+      - jacksonville
+      - neworleans
+      # Great Lakes / Midwest
+      - chicago
+      - detroit
+      - milwaukee
+      - cleveland
+      # Other
+      - honolulu
+      - maine
+      - newlondon
+      - rhodeisland
+      - delaware
+  sailing_anarchy:
+    enabled: true
+  sailing_texas:
+    enabled: true
+  ericson_yachts:
+    enabled: true
+  cruisers_forum:
+    enabled: true
+  sailboatowners:
+    enabled: true
+  sailnet:
+    enabled: true
+  fortyeight_north:
+    enabled: true
+  sail_northwest:
+    enabled: true
+
+rate_limit:
+  delay_between_requests: 2.0
+
+database:
+  path: ./listings.db
