@@ -31,6 +31,8 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           EMAIL_FROM: ${{ secrets.SMTP_USER }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          GOOGLE_CSE_API_KEY: ${{ secrets.GOOGLE_CSE_API_KEY }}
+          GOOGLE_CSE_CX: ${{ secrets.GOOGLE_CSE_CX }}
         run: python main.py
 
       - name: Commit updated database

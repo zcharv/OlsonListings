@@ -15,6 +15,11 @@ search:
   filter_pattern: 'olson\s*911|911\s*se|911s[e\b]'
 
 sources:
+  google_cse:
+    enabled: true
+    api_key: ""       # or set GOOGLE_CSE_API_KEY env var
+    cx: ""            # or set GOOGLE_CSE_CX env var
+    # queries:        # optional override — defaults cover broad + site-targeted searches
   sailboatlistings:
     enabled: true
   craigslist:
@@ -69,7 +74,7 @@ sources:
   sailing_texas:
     enabled: true
   ericson_yachts:
-    enabled: true
+    enabled: false  # 403 blocked, check manually
   cruisers_forum:
     enabled: true
   sailboatowners:

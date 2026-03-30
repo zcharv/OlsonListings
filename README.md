@@ -35,19 +35,33 @@ Push to GitHub, then add these repo secrets (**Settings > Secrets and variables 
 | `SMTP_USER` | Your Gmail address |
 | `SMTP_PASSWORD` | Gmail App Password |
 | `EMAIL_TO` | Recipient email(s), comma-separated |
+| `GOOGLE_CSE_API_KEY` | Google Custom Search API key |
+| `GOOGLE_CSE_CX` | Custom Search Engine ID |
 
 The workflow runs daily at 8 AM PST. You can also trigger it manually from the Actions tab.
+
+### 5. Set up Google Custom Search (for broad coverage)
+
+This searches Google for new Olson 911SE listings across all indexed sites — including YachtWorld, Boat Trader, eBay, Cruisers Forum, and others that block direct scraping.
+
+1. Go to [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials) and create an API key
+2. Enable the **Custom Search API** at [console.cloud.google.com/apis/library/customsearch.googleapis.com](https://console.cloud.google.com/apis/library/customsearch.googleapis.com)
+3. Go to [programmablesearchengine.google.com](https://programmablesearchengine.google.com) and create a new search engine with **"Search the entire web"** enabled
+4. Copy the **Search Engine ID** (cx)
+5. Add both as repo secrets: `GOOGLE_CSE_API_KEY` and `GOOGLE_CSE_CX`
+
+Free tier: 100 queries/day (the monitor uses ~11 per run).
 
 ## Automated Sources
 
 | Source | What it searches |
 |---|---|
+| **Google Custom Search** | Broad web search + targeted site: queries for YachtWorld, Boat Trader, eBay, Cruisers Forum, Sailing Anarchy, SailNet, EY.o Forum |
 | [Sailboat Listings](https://www.sailboatlistings.com) | All Olson manufacturer listings, filtered for 911 |
 | [Craigslist](https://craigslist.org) | 38 regions (PNW priority + nationwide coastal) |
 | [48° North](https://48north.com/classifieds/) | PNW sailing magazine classifieds |
 | [Sailboat Owners Forum](https://forums.sailboatowners.com) | Ericson section + boats for sale |
 | [Sailing Texas](https://www.sailingtexas.com) | Sailboat index pages |
-| [EY.o Forum](https://ericsonyachts.org/ie/) | Ericson Yachts owners forum classifieds |
 
 ## Manual Alerts to Set Up
 
@@ -78,6 +92,7 @@ These sites block automated scraping. Set up their built-in email alerts or save
 - [Olson 30 Sailboat Group](https://www.facebook.com/groups/olson30/) — Olson-specific group, check for 911SE posts
 
 ### Other sites to check periodically
+- [EY.o Forum](https://ericsonyachts.org/ie/) — Ericson Yachts owners forum, check classifieds/for-sale section
 - [Sailing Anarchy Classifieds](https://sailinganarchy.com/classifieds/) — search for "olson" (site blocks automated access)
 - [Cruisers Forum Boats for Sale](https://www.cruisersforum.com/forums/f152/) — browse or search for "olson 911"
 - [SailNet Marketplace](https://www.sailnet.com/forums/ericson.28/) — Ericson section, check for 911SE posts
