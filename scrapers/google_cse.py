@@ -62,7 +62,10 @@ class GoogleCSEScraper(BaseScraper):
         }
 
         resp = requests.get(CSE_URL, params=params, timeout=30)
-        resp.raise_for_status()
+        if resp.status_code != 200:
+            error_detail = resp.text[:500]
+            logger.error(f"[{self.source_name}] API error {resp.status_code}: {error_detail}")
+            resp.raise_for_status()
         data = resp.json()
 
         listings = []
