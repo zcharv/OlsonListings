@@ -5,6 +5,9 @@ on:
     - cron: '0 15 * * *'  # 3 PM UTC = 8 AM PST
   workflow_dispatch:       # Manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   check:
     runs-on: ubuntu-latest
