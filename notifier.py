@@ -14,10 +14,12 @@ def send_notification(listings: list[Listing], config: dict) -> None:
 
     email_cfg = config["email"]
     n = len(listings)
-    subject = f"[OlsonListings] {n} new Olson 911SE listing{'s' if n != 1 else ''} found"
+    boats = config.get("boats", [{"name": "Olson 911SE"}])
+    boat_names = ", ".join(b["name"] for b in boats)
+    subject = f"[BoatListings] {n} new {boat_names} listing{'s' if n != 1 else ''} found"
 
-    html_body = _build_html(listings)
-    text_body = _build_text(listings)
+    html_body = _build_html(listings, boat_names)
+    text_body = _build_text(listings, boat_names)
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
@@ -41,7 +43,7 @@ def send_notification(listings: list[Listing], config: dict) -> None:
         raise
 
 
-def _build_html(listings: list[Listing]) -> str:
+def _build_html(listings: list[Listing], boat_names: str = "Olson 911SE") -> str:
     rows = ""
     for l in listings:
         rows += f"""
@@ -62,7 +64,7 @@ def _build_html(listings: list[Listing]) -> str:
     return f"""
     <html>
     <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #333;">New Olson 911SE Listings</h2>
+        <h2 style="color: #333;">New {boat_names} Listings</h2>
         <table style="width: 100%; border-collapse: collapse;">
             {rows}
         </table>
@@ -73,8 +75,8 @@ def _build_html(listings: list[Listing]) -> str:
     </html>"""
 
 
-def _build_text(listings: list[Listing]) -> str:
-    lines = ["New Olson 911SE Listings", "=" * 30, ""]
+def _build_text(listings: list[Listing], boat_names: str = "Olson 911SE") -> str:
+    lines = [f"New {boat_names} Listings", "=" * 30, ""]
     for l in listings:
         lines.append(f"{l.title}")
         if l.price or l.location:

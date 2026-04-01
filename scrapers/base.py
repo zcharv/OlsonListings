@@ -10,10 +10,24 @@ from models import Listing
 
 logger = logging.getLogger(__name__)
 
-OLSON_911_PATTERN = re.compile(
-    r"olson\s*911|911\s*se|911s[e\b]",
-    re.IGNORECASE,
-)
+# Default filter pattern — matches any boat in the configured boats list
+_boat_patterns: list[re.Pattern] = []
+
+
+def set_boat_patterns(boats: list[dict]) -> None:
+    """Compile regex patterns from the boats config list."""
+    global _boat_patterns
+    _boat_patterns = []
+    for boat in boats:
+        pattern = boat.get("filter_pattern", "")
+        if pattern:
+            _boat_patterns.append(re.compile(pattern, re.IGNORECASE))
+
+
+def matches_any_boat(text: str) -> bool:
+    """Check if text matches any configured boat pattern."""
+    return any(p.search(text) for p in _boat_patterns)
+
 
 USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
@@ -57,4 +71,5 @@ class BaseScraper(ABC):
 
     @staticmethod
     def matches_olson_911(text: str) -> bool:
-        return bool(OLSON_911_PATTERN.search(text))
+        """Check if text matches any configured boat. Name kept for compatibility."""
+        return matches_any_boat(text)

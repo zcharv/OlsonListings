@@ -7,12 +7,27 @@ email:
   to_addrs:
     - your_email@gmail.com
 
-search:
-  queries:
-    - "olson 911"
-    - "olson 911se"
-    - "ericson olson"
-  filter_pattern: 'olson\s*911|911\s*se|911s[e\b]'
+# Add boats to search for. Each boat needs:
+#   name: display name for emails
+#   search_queries: terms sent to web search engines
+#   filter_pattern: regex to match in results (applied to titles/descriptions)
+boats:
+  - name: Olson 911SE
+    search_queries:
+      - "olson 911se sailboat"
+      - "olson 911 se sailboat for sale"
+      - "olson 911se for sale"
+    filter_pattern: 'olson\s*911|911\s*se|911s[e\b]'
+  - name: Olson 34
+    search_queries:
+      - "olson 34 sailboat for sale"
+      - "olson 34 sailboat"
+    filter_pattern: 'olson\s*34'
+  # Add more boats:
+  # - name: J/24
+  #   search_queries:
+  #     - "j/24 sailboat for sale"
+  #   filter_pattern: 'j[/\s-]*24'
 
 sources:
   web_search:
