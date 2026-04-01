@@ -62,6 +62,12 @@ def load_config() -> dict:
     email.setdefault("smtp_host", "smtp.gmail.com")
     email.setdefault("smtp_port", 587)
 
+    # Google Alerts feeds from env var (comma-separated URLs)
+    if os.environ.get("GOOGLE_ALERTS_FEEDS"):
+        sources = config.setdefault("sources", {})
+        ga = sources.setdefault("google_alerts", {})
+        ga["feeds"] = [u.strip() for u in os.environ["GOOGLE_ALERTS_FEEDS"].split(",")]
+
     # Default boats config if none specified
     config.setdefault("boats", [
         {
