@@ -35,28 +35,14 @@ Push to GitHub, then add these repo secrets (**Settings > Secrets and variables 
 | `SMTP_USER` | Your Gmail address |
 | `SMTP_PASSWORD` | Gmail App Password |
 | `EMAIL_TO` | Recipient email(s), comma-separated |
-| `GOOGLE_CSE_API_KEY` | Google Custom Search API key |
-| `GOOGLE_CSE_CX` | Custom Search Engine ID |
 
 The workflow runs daily at 8 AM PST. You can also trigger it manually from the Actions tab.
-
-### 5. Set up Google Custom Search (for broad coverage)
-
-This searches Google for new Olson 911SE listings across all indexed sites — including YachtWorld, Boat Trader, eBay, Cruisers Forum, and others that block direct scraping.
-
-1. Go to [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials) and create an API key
-2. Enable the **Custom Search API** at [console.cloud.google.com/apis/library/customsearch.googleapis.com](https://console.cloud.google.com/apis/library/customsearch.googleapis.com)
-3. Go to [programmablesearchengine.google.com](https://programmablesearchengine.google.com) and create a new search engine with **"Search the entire web"** enabled
-4. Copy the **Search Engine ID** (cx)
-5. Add both as repo secrets: `GOOGLE_CSE_API_KEY` and `GOOGLE_CSE_CX`
-
-Free tier: 100 queries/day (the monitor uses ~11 per run).
 
 ## Automated Sources
 
 | Source | What it searches |
 |---|---|
-| **Google Custom Search** | Broad web search + targeted site: queries for YachtWorld, Boat Trader, eBay, Cruisers Forum, Sailing Anarchy, SailNet, EY.o Forum |
+| **Google Search** | Broad web search for Olson 911SE — catches listings on YachtWorld, Boat Trader, eBay, Cruisers Forum, Sailing Anarchy, SailNet, EY.o, and any other indexed site |
 | [Sailboat Listings](https://www.sailboatlistings.com) | All Olson manufacturer listings, filtered for 911 |
 | [Craigslist](https://craigslist.org) | 38 regions (PNW priority + nationwide coastal) |
 | [48° North](https://48north.com/classifieds/) | PNW sailing magazine classifieds |

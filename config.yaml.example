@@ -15,11 +15,21 @@ search:
   filter_pattern: 'olson\s*911|911\s*se|911s[e\b]'
 
 sources:
-  google_cse:
+  web_search:
     enabled: true
-    api_key: ""       # or set GOOGLE_CSE_API_KEY env var
-    cx: ""            # or set GOOGLE_CSE_CX env var
-    # queries:        # optional override — defaults cover broad + site-targeted searches
+    # backends: [duckduckgo, bing, google, yahoo]  # try in order, fallback on failure
+    # queries:  # optional override
+  searxng:
+    enabled: true
+    # instances:  # optional override — defaults to public SearXNG instances
+  google_alerts:
+    enabled: true
+    feeds: []
+    # Add your Google Alerts RSS feed URLs here. To set up:
+    # 1. Go to google.com/alerts
+    # 2. Create alerts for "olson 911se", "olson 911 se", etc.
+    # 3. Set "Deliver to" → RSS feed
+    # 4. Copy the RSS feed URLs here
   sailboatlistings:
     enabled: true
   craigslist:
@@ -69,21 +79,13 @@ sources:
       - newlondon
       - rhodeisland
       - delaware
-  sailing_anarchy:
-    enabled: true
   sailing_texas:
     enabled: true
   ericson_yachts:
     enabled: false  # 403 blocked, check manually
-  cruisers_forum:
-    enabled: true
   sailboatowners:
     enabled: true
-  sailnet:
-    enabled: true
   fortyeight_north:
-    enabled: true
-  sail_northwest:
     enabled: true
 
 rate_limit:

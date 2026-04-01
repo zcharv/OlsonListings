@@ -20,7 +20,9 @@ logger = logging.getLogger(__name__)
 
 # Scraper registry — maps config key to scraper class
 SCRAPER_MAP = {
-    "google_cse": "scrapers.google_cse.GoogleCSEScraper",
+    "web_search": "scrapers.web_search.WebSearchScraper",
+    "searxng": "scrapers.searxng.SearXNGScraper",
+    "google_alerts": "scrapers.google_alerts.GoogleAlertsScraper",
     "sailboatlistings": "scrapers.sailboatlistings.SailboatListingsScraper",
     "craigslist": "scrapers.craigslist.CraigslistScraper",
     "fortyeight_north": "scrapers.fortyeight_north.FortyEightNorthScraper",

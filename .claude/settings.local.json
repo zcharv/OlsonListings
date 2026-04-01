@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:www.sailingtexas.com)"
+      "WebFetch(domain:www.sailingtexas.com)",
+      "Bash(/Users/zharv/Projects/OlsonListings/.venv/bin/python -c \":*)"
     ]
   }
 }
